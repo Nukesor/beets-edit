@@ -3,9 +3,10 @@ use std::{
     io::{Seek, Write},
 };
 
+use regex::Regex;
 use serde::Serialize;
 
-use crate::internal_prelude::*;
+use crate::{config::Rewrite, internal_prelude::*};
 
 pub mod edit_album;
 pub mod edit_track;
@@ -34,4 +35,24 @@ pub fn write_document<T: Serialize>(file: &mut File, items: Vec<T>) -> Result<()
         .wrap_err("Failed to write new yaml to temporary file?")?;
 
     Ok(())
+}
+
+/// Return whether a given string (`hay`) matches any expression in the given [Rewrite].
+pub fn rewrite_matches(rewrite: &Rewrite, hay: &str, context: &str, field: &str) -> Result<bool> {
+    for expr in &rewrite.expressions {
+        // Check for direct matches (no regex)
+        if hay == expr {
+            info!("{context} - found exact match '{expr}' on {field} '{hay}'",);
+            return Ok(true);
+        }
+
+        // Check for regex matches (actual regexes).
+        let re = Regex::new(expr).wrap_err_with(|| format!("Found invalid expression {expr}"))?;
+
+        if re.is_match(hay) {
+            info!("{context} - found regex match '{expr}' on {field} '{hay}'",);
+            return Ok(true);
+        }
+    }
+    Ok(false)
 }
