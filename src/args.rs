@@ -25,7 +25,7 @@ pub enum SubCommand {
     /// This is called by `beet edit` via the `EDITOR` variable.
     EditTracks {
         /// The temporary yaml file to edit
-        file: PathBuf,
+        path: PathBuf,
     },
 
     /// Edit an album
@@ -33,6 +33,6 @@ pub enum SubCommand {
     /// This is called by `beet edit -a` via the `EDITOR` variable.
     EditAlbum {
         /// The temporary yaml file to edit
-        file: PathBuf,
+        path: PathBuf,
     },
 }
