@@ -107,7 +107,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "beets_edit"
+name = "beets-edit"
 version = "0.1.0"
 dependencies = [
  "clap",

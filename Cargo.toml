@@ -1,5 +1,5 @@
 [package]
-name = "beets_edit"
+name = "beets-edit"
 authors = ["Arne Beer <contact@arne.beer>"]
 license = "MIT OR Apache-2.0"
 version = "0.1.0"
