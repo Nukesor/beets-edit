@@ -1,4 +1,4 @@
-use std::{fs::File, io::BufReader};
+use std::fs::File;
 
 use color_eyre::eyre::OptionExt;
 use serde::{Deserialize, Serialize};
@@ -51,12 +51,9 @@ impl Config {
 
         info!("Found config file at: {path:?}");
 
-        // Open the file in read-only mode with buffer.
         let file =
             File::open(&path).wrap_err_with(|| format!("Error opening config file at {path:?}"))?;
-        let reader = BufReader::new(file);
-
-        let config = serde_yaml::from_reader(reader)
+        let config = serde_yaml::from_reader(file)
             .wrap_err_with(|| format!("Error deserializing file at {path:?}"))?;
         Ok(config)
     }
