@@ -3,7 +3,7 @@ use internal_prelude::*;
 
 use crate::{
     args::CliArguments,
-    commands::{edit_album::edit_album, edit_track::edit_tracks, run::run},
+    commands::{edit_albums::edit_album, edit_tracks::edit_tracks, run::run},
     config::Config,
 };
 
@@ -39,6 +39,6 @@ fn main() -> Result<()> {
     match opt.cmd {
         args::SubCommand::Run => run(&config),
         args::SubCommand::EditTracks { path } => edit_tracks(&config, &path),
-        args::SubCommand::EditAlbum { path } => edit_album(&config, &path),
+        args::SubCommand::EditAlbums { path } => edit_album(&config, &path),
     }
 }

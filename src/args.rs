@@ -31,7 +31,7 @@ pub enum SubCommand {
     /// Edit an album
     ///
     /// This is called by `beet edit -a` via the `EDITOR` variable.
-    EditAlbum {
+    EditAlbums {
         /// The temporary yaml file to edit
         path: PathBuf,
     },

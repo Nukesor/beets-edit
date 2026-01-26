@@ -8,8 +8,8 @@ use serde::Serialize;
 
 use crate::{config::Rewrite, internal_prelude::*};
 
-pub mod edit_album;
-pub mod edit_track;
+pub mod edit_albums;
+pub mod edit_tracks;
 pub mod run;
 
 pub fn write_document<T: Serialize>(file: &mut File, items: Vec<T>) -> Result<()> {

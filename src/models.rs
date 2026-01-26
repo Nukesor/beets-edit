@@ -16,5 +16,6 @@ pub struct Track {
 pub struct Album {
     pub album: String,
     pub albumartist: String,
+    pub albumartists: String,
     pub id: usize,
 }

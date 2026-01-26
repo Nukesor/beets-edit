@@ -8,7 +8,9 @@ use crate::internal_prelude::*;
 /// Global config of all rules that should be applied.
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct Config {
+    #[serde(default)]
     pub artist_rewrites: Vec<Rewrite>,
+    #[serde(default)]
     pub albumartist_rewrites: Vec<Rewrite>,
 }
 
@@ -19,7 +21,9 @@ pub struct Config {
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct Rewrite {
     pub expressions: Vec<String>,
+    #[serde(default)]
     pub single: Option<String>,
+    #[serde(default)]
     pub multi: Option<Vec<String>>,
 }
 

@@ -35,12 +35,21 @@ pub fn edit_album(config: &Config, path: &PathBuf) -> Result<()> {
             }
         }
 
-        if let Some(rewrite) = found_rewrite
-            && let Some(single) = rewrite.single
-        {
+        // If nothing matches, use as is and continue
+        let Some(rewrite) = found_rewrite else {
+            albums.push(album);
+            continue;
+        };
+
+        // Handle albumartist field overwrite
+        if let Some(single) = rewrite.single {
             album.albumartist = single;
         }
 
+        // Handle albumartists field overwrite
+        if let Some(multi) = rewrite.multi {
+            album.albumartists = multi.join("\\␀");
+        }
         albums.push(album);
     }
 
